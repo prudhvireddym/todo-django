@@ -133,11 +133,17 @@ STATICFILES_DIRS = [
      os.path.join(BASE_DIR, 'frontend/build/static')
 ]
 
+
 CORS_ORIGIN_WHITELIST = [
 
     "http://localhost:3000",
+    "http://18.219.241.55:3000"
 
 ]
 
 ALLOWED_HOSTS = ['*']
+
+# CORS Config
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = False
 
