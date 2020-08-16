@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+	name: todo-front-back
+spec:
+
+ rules:
+ - host: front.my-domain.com
+   http:
+    paths:
+	- backend:
+		serviceName: front-serviceName
+		servicePort: 80
+ - host: back.my-domain.com
+   http:
+    paths:
+	- backend:
+	    serviceName: back-serviceName
+		servicePort: 80

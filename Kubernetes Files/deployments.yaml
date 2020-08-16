@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-backend
+  labels:
+    app: django-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: django-backend
+  template:
+    metadata:
+      labels:
+        app: django-backend
+    spec:
+      containers:
+        - name: django-backend-container
+          image: pppp1234/django-to-do:01
+          ports:
+          - containerPort: 8000
+          livenessProbe:
+            tcpSocket:
+              port: 8000
+            initialDelaySeconds: 2
+            periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: 8000
+            initialDelaySeconds: 2
+            periodSeconds: 10
+        resources:
+          requests:
+            cpu: 100m 
+            memory: 200Mi 
+          limits:
+            cpu: 200m 
+            memory: 400Mi
+        env:
+          - name: CITY 
+            valueFrom:
+              configMapKeyRef:
+                name: env-var
+                key: city
+        volumeMounts:
+          - mountPath: /demo
+            name: demo-volume
+        volumes:
+        - name: demo-volume
+          emptyDir: {}
+
